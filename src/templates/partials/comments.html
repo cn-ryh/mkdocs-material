@@ -14,6 +14,5 @@
 <!-- Comments Integration -->
 {% if not page.is_homepage and disqus %}
 {% set pageID = page.title | default("404", true) %}
-<div id="__comments" class="giscus" data-no-instant></div>
 {% include "partials/javascripts/comments.html" %}
 {% endif %}
