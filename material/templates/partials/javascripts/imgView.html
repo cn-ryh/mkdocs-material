@@ -1,0 +1,87 @@
+<script>
+    let cloneEl = null
+    let originalEl = null
+    document.querySelectorAll(`img`).forEach((elem) => {
+        elem.addEventListener('click', function (e) {
+            e.preventDefault()
+            originalEl = e.target // 缓存原始图DOM节点
+            cloneEl = originalEl.cloneNode(true) // 克隆图片
+            originalEl.style.opacity = 0
+            openPreview() // 打开预览
+        })
+    })
+    function openPreview() {
+        // 创建蒙层
+        const mask = document.createElement('div')
+        mask.classList.add('imgView')
+        // 添加在body下
+        document.body.appendChild(mask)
+        // 注册蒙层的点击事件，关闭弹窗
+        const clickFunc = function () {
+            document.body.removeChild(this)
+            originalEl.style.opacity = 1
+            mask.removeEventListener('click', clickFunc)
+        }
+        mask.addEventListener("click", clickFunc)
+        mask.appendChild(cloneEl) // 添加图片
+        const { top, left } = originalEl.getBoundingClientRect()
+        console.log(top, left);
+        changeStyle(cloneEl, [`left: ${left}px`, `top: ${top}px`])
+        mask.appendChild(cloneEl)
+        let { innerWidth: winWidth, innerHeight: winHeight } = window
+        // 计算自适应屏幕的缩放值
+        function adaptScale() {
+            const { offsetWidth: w, offsetHeight: h } = originalEl // 获取文档中图片的宽高
+            let scale = 0
+            scale = winWidth * 0.9 / w
+            if (h * scale > winHeight * 0.9 - 80) {
+                scale = (winHeight * 0.9 - 80) / h
+            }
+            return scale
+        }
+        const { offsetWidth, offsetHeight } = originalEl // 获取文档中图片的宽高
+
+        // 移动图片到屏幕中心位置
+        const originalCenterPoint = { x: offsetWidth / 2 + left, y: offsetHeight / 2 + top }
+        const winCenterPoint = { x: winWidth / 2, y: winHeight / 2 }
+        const offsetDistance = { left: winCenterPoint.x - originalCenterPoint.x + left, top: winCenterPoint.y - originalCenterPoint.y + top }
+        const diffs = { left: ((adaptScale() - 1) * offsetWidth) / 2, top: ((adaptScale() - 1) * offsetHeight) / 2 }
+        changeStyle(cloneEl, ['transition: all 0.3s', `width: ${offsetWidth * adaptScale() + 'px'}`,`height: ${offsetHeight * adaptScale() + `px`}`, `transform: translate(${offsetDistance.left - left - diffs.left}px, ${offsetDistance.top - top - diffs.top}px)`])
+        // 动画结束后消除定位重置的偏差
+        setTimeout(() => {
+            changeStyle(cloneEl, ['transition: all 0s', `left: 0`, `top: 0`, `transform: translate(${offsetDistance.left - diffs.left}px, ${offsetDistance.top - diffs.top}px)`])
+            offset = { left: offsetDistance.left - diffs.left, top: offsetDistance.top - diffs.top } // 记录值
+        }, 300)
+    }
+
+    // 用于修改样式的工具类，并且可以减少回流重绘，后面代码中会频繁用到
+    function changeStyle(el, arr) {
+        const original = el.style.cssText.split(';')
+        original.pop()
+        el.style.cssText = original.concat(arr).join(';') + ';'
+    }
+
+</script>
+<style>
+    .imgView {
+        touch-action: none;
+        user-select: none;
+        position: fixed;
+        z-index: 999999999;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 175, 175, 0.85);
+    }
+
+    .imgView>img {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        transform: translateZ(0);
+    }
+    img{
+        cursor: pointer;
+    }
+</style>
