@@ -24,12 +24,13 @@
 
 <!doctype html>
 <html lang="{{ lang.t('language') }}" class="no-js">
-  <head>
+
+<head>
 
     <!-- Meta tags -->
     {% block site_meta %}
-      <meta charset="utf-8" />
-      <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
     <!--
       <link rel="dns-prefetch" href="//oi-wiki.org">
       <link rel="dns-prefetch" href="//search.oi-wiki.org">
@@ -38,193 +39,206 @@
       <meta name="viewport" content="width=device-width,initial-scale=1" />
     -->
 
-      <!-- Page description -->
-      {% if page.meta and page.meta.description %}
-        <meta name="description" content="{{ page.meta.description }}" />
-      {% elif config.site_description %}
-        <meta name="description" content="{{ config.site_description }}" />
-      {% endif %}
+    <!-- Page description -->
+    {% if page.meta and page.meta.description %}
+    <meta name="description" content="{{ page.meta.description }}" />
+    {% elif config.site_description %}
+    <meta name="description" content="{{ config.site_description }}" />
+    {% endif %}
 
-      <!-- Page author -->
-      {% if page.meta and page.meta.author %}
-        <meta name="author" content="{{ page.meta.author }}" />
-      {% elif config.site_author %}
-        <meta name="author" content="{{ config.site_author }}" />
-      {% endif %}
+    <!-- Page author -->
+    {% if page.meta and page.meta.author %}
+    <meta name="author" content="{{ page.meta.author }}" />
+    {% elif config.site_author %}
+    <meta name="author" content="{{ config.site_author }}" />
+    {% endif %}
 
-      <!-- Canonical -->
-      {% if page.canonical_url %}
-        <link rel="canonical" href="{{ page.canonical_url }}" />
-      {% endif %}
+    <!-- Canonical -->
+    {% if page.canonical_url %}
+    <link rel="canonical" href="{{ page.canonical_url }}" />
+    {% endif %}
 
-      <!-- Previous page -->
-      {% if page.previous_page %}
-        <link rel="prev" href="{{ page.previous_page.url | url }}" />
-      {% endif %}
+    <!-- Previous page -->
+    {% if page.previous_page %}
+    <link rel="prev" href="{{ page.previous_page.url | url }}" />
+    {% endif %}
 
-      <!-- Next page -->
-      {% if page.next_page %}
-        <link rel="next" href="{{ page.next_page.url | url }}" />
-      {% endif %}
+    <!-- Next page -->
+    {% if page.next_page %}
+    <link rel="next" href="{{ page.next_page.url | url }}" />
+    {% endif %}
 
-      <!-- RSS feed -->
-      {% if "rss" in config.plugins %}
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="{{ lang.t('rss.created') }}"
-          href="{{ 'feed_rss_created.xml' | url }}"
-        />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="{{ lang.t('rss.updated') }}"
-          href="{{ 'feed_rss_updated.xml' | url }}"
-        />
-      {% endif %}
+    <!-- RSS feed -->
+    {% if "rss" in config.plugins %}
+    <link rel="alternate" type="application/rss+xml" title="{{ lang.t('rss.created') }}"
+        href="{{ 'feed_rss_created.xml' | url }}" />
+    <link rel="alternate" type="application/rss+xml" title="{{ lang.t('rss.updated') }}"
+        href="{{ 'feed_rss_updated.xml' | url }}" />
+    {% endif %}
 
-      <!-- Favicon -->
-      <link rel="icon" href="{{ config.theme.favicon | url }}" />
+    <!-- Favicon -->
+    <link rel="icon" href="{{ config.theme.favicon | url }}" />
 
-      <!-- Generator banner -->
-      <meta
-        name="generator"
-        content="mkdocs-{{ mkdocs_version }}, $md-name$-$md-version$"
-      />
+    <!-- Generator banner -->
+    <meta name="generator" content="mkdocs-{{ mkdocs_version }}, $md-name$-$md-version$" />
     {% endblock %}
 
     <!-- Site title -->
     {% block htmltitle %}
-      {% if page.meta and page.meta.title %}
-        <title>{{ page.meta.title }} - {{ config.site_name }}</title>
-      {% elif page.title and not page.is_homepage %}
-        <title>{{ page.title | striptags }} - {{ config.site_name }}</title>
-      {% else %}
-        <title>{{ config.site_name }}</title>
-      {% endif %}
+    {% if page.meta and page.meta.title %}
+    <title>{{ page.meta.title }} - {{ config.site_name }}</title>
+    {% elif page.title and not page.is_homepage %}
+    <title>{{ page.title | striptags }} - {{ config.site_name }}</title>
+    {% else %}
+    <title>{{ config.site_name }}</title>
+    {% endif %}
     {% endblock %}
 
     <!-- Theme-related style sheets -->
     {% block styles %}
-      <link rel="stylesheet" href="{{ 'assets/stylesheets/main.css' | url }}" />
+    <link rel="stylesheet" href="{{ 'assets/stylesheets/main.css' | url }}" />
 
-      <!-- Extra color palette -->
-      {% if config.theme.palette %}
-        {% set palette = config.theme.palette %}
-        <link
-          rel="stylesheet"
-          href="{{ 'assets/stylesheets/palette.css' | url }}"
-        />
-      {% endif %}
+    <!-- Extra color palette -->
+    {% if config.theme.palette %}
+    {% set palette = config.theme.palette %}
+    <link rel="stylesheet" href="{{ 'assets/stylesheets/palette.css' | url }}" />
+    {% endif %}
 
-      <!-- Custom icons -->
-      {% include "partials/icons.html" %}
+    <!-- Custom icons -->
+    {% include "partials/icons.html" %}
     {% endblock %}
 
     <!-- JavaScript libraries -->
     {% block libs %}
-      {% for script in config.extra.polyfills %}
-        {{ script | script_tag }}
-      {% endfor %}
+    {% for script in config.extra.polyfills %}
+    {{ script | script_tag }}
+    {% endfor %}
     {% endblock %}
 
     <!-- Webfonts -->
     {% block fonts %}
 
-      <!-- Load fonts from Google -->
-      {% if config.theme.font != false %}
-        {% set text = config.theme.font.get("text", "Roboto") %}
-        {% set code = config.theme.font.get("code", "Roboto Mono") %}
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family={{
+    <!-- Load fonts from Google -->
+    {% if config.theme.font != false %}
+    {% set text = config.theme.font.get("text", "Roboto") %}
+    {% set code = config.theme.font.get("code", "Roboto Mono") %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{
             text | replace(' ', '+') + ':300,300i,400,400i,700,700i%7C' +
             code | replace(' ', '+') + ':400,400i,700,700i'
-          }}&display=fallback"
-        />
-        <style>
-          :root {
+          }}&display=fallback" />
+    <style>
+        :root {
             --md-text-font: "{{ text }}";
             --md-code-font: "{{ code }}";
-          }
+        }
 
-          /* fira-sans-300 */
-          @font-face {
+        /* fira-sans-300 */
+        @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
             font-weight: 300;
-            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.eot'); /* IE9 Compat Modes */
+            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.eot');
+            /* IE9 Compat Modes */
             src: local('Fira Sans'), local('FiraSans-Normal'),
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.woff2') format('woff2'), /* Super Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.woff') format('woff'), /* Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.svg#FiraSans') format('svg'); /* Legacy iOS */
-          }
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.eot?#iefix') format('embedded-opentype'),
+                /* IE6-IE8 */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.woff2') format('woff2'),
+                /* Super Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.woff') format('woff'),
+                /* Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.ttf') format('truetype'),
+                /* Safari, Android, iOS */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-300.svg#FiraSans') format('svg');
+            /* Legacy iOS */
+        }
 
-          /* fira-sans-regular */
-          @font-face {
+        /* fira-sans-regular */
+        @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
             font-weight: regular;
-            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.eot'); /* IE9 Compat Modes */
+            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.eot');
+            /* IE9 Compat Modes */
             src: local('Fira Sans'), local('FiraSans-Normal'),
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.woff2') format('woff2'), /* Super Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.woff') format('woff'), /* Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.svg#FiraSans') format('svg'); /* Legacy iOS */
-          }
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.eot?#iefix') format('embedded-opentype'),
+                /* IE6-IE8 */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.woff2') format('woff2'),
+                /* Super Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.woff') format('woff'),
+                /* Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.ttf') format('truetype'),
+                /* Safari, Android, iOS */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-regular.svg#FiraSans') format('svg');
+            /* Legacy iOS */
+        }
 
-          /* fira-sans-italic */
-          @font-face {
+        /* fira-sans-italic */
+        @font-face {
             font-family: 'Fira Sans';
             font-style: italic;
             font-weight: regular;
-            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.eot'); /* IE9 Compat Modes */
+            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.eot');
+            /* IE9 Compat Modes */
             src: local('Fira Sans'), local('FiraSans-Italic'),
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.woff2') format('woff2'), /* Super Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.woff') format('woff'), /* Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.svg#FiraSans') format('svg'); /* Legacy iOS */
-          }
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.eot?#iefix') format('embedded-opentype'),
+                /* IE6-IE8 */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.woff2') format('woff2'),
+                /* Super Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.woff') format('woff'),
+                /* Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.ttf') format('truetype'),
+                /* Safari, Android, iOS */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-italic.svg#FiraSans') format('svg');
+            /* Legacy iOS */
+        }
 
-          /* fira-sans-700 */
-          @font-face {
+        /* fira-sans-700 */
+        @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
             font-weight: 700;
-            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.eot'); /* IE9 Compat Modes */
+            src: url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.eot');
+            /* IE9 Compat Modes */
             src: local('Fira Sans'), local('FiraSans-Normal'),
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.woff2') format('woff2'), /* Super Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.woff') format('woff'), /* Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.svg#FiraSans') format('svg'); /* Legacy iOS */
-          }
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.eot?#iefix') format('embedded-opentype'),
+                /* IE6-IE8 */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.woff2') format('woff2'),
+                /* Super Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.woff') format('woff'),
+                /* Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.ttf') format('truetype'),
+                /* Safari, Android, iOS */
+                url('//lib.baomitu.com/fonts/fira-sans/fira-sans-700.svg#FiraSans') format('svg');
+            /* Legacy iOS */
+        }
 
-          /* fira-mono-regular */
-          @font-face {
+        /* fira-mono-regular */
+        @font-face {
             font-family: 'Fira Mono';
             font-style: normal;
             font-weight: regular;
-            src: url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.eot'); /* IE9 Compat Modes */
+            src: url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.eot');
+            /* IE9 Compat Modes */
             src: local('Fira Mono'), local('FiraMono-Normal'),
-            url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.woff2') format('woff2'), /* Super Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.woff') format('woff'), /* Modern Browsers */
-            url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.svg#FiraMono') format('svg'); /* Legacy iOS */
-          }
-        </style>
-      {% endif %}
+                url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.eot?#iefix') format('embedded-opentype'),
+                /* IE6-IE8 */
+                url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.woff2') format('woff2'),
+                /* Super Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.woff') format('woff'),
+                /* Modern Browsers */
+                url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.ttf') format('truetype'),
+                /* Safari, Android, iOS */
+                url('//lib.baomitu.com/fonts/fira-mono/fira-mono-regular.svg#FiraMono') format('svg');
+            /* Legacy iOS */
+        }
+    </style>
+    {% endif %}
     {% endblock %}
 
     <!-- Custom style sheets -->
     {% for path in config.extra_css %}
-      <link rel="stylesheet" href="{{ path | url }}" />
+    <link rel="stylesheet" href="{{ path | url }}" />
     {% endfor %}
 
     <!-- Helper functions for inline scripts -->
@@ -232,263 +246,237 @@
 
     <!-- Analytics -->
     {% block analytics %}
-      {% include "partials/integrations/analytics.html" %}
+    {% include "partials/integrations/analytics.html" %}
     {% endblock %}
 
     <!-- Meta tags from front matter or plugins -->
     {% if page.meta and page.meta.meta %}
-      {% for tag in page.meta.meta %}
-        <meta
-          {% for key, value in tag.items() %}
-            {{ key }}="{{value}}"
-          {% endfor %}
-        />
-      {% endfor %}
+    {% for tag in page.meta.meta %}
+    <meta {% for key, value in tag.items() %} {{ key }}="{{value}}" {% endfor %} />
+    {% endfor %}
     {% endif %}
 
     <!-- Custom front matter -->
     {% block extrahead %}{% endblock %}
-  </head>
+</head>
 
-  <!-- Set text direction and color palette, if defined -->
-  {% set direction = config.theme.direction or lang.t("direction") %}
-  {% if config.theme.palette %}
-    {% set palette = config.theme.palette %}
-    {% if not palette is mapping %}
-      {% set palette = palette | first %}
-    {% endif %}
-    {% set scheme  = palette.scheme  | d("default", true) %}
-    {% set primary = palette.primary | d("indigo", true) %}
-    {% set accent  = palette.accent  | d("indigo", true) %}
-    <body
-      dir="{{ direction }}"
-      data-md-color-scheme="{{ scheme | replace(' ', '-') }}"
-      data-md-color-primary="{{ primary | replace(' ', '-') }}"
-      data-md-color-accent="{{ accent | replace(' ', '-') }}"
-    >
-  {% else %}
+<!-- Set text direction and color palette, if defined -->
+{% set direction = config.theme.direction or lang.t("direction") %}
+{% if config.theme.palette %}
+{% set palette = config.theme.palette %}
+{% if not palette is mapping %}
+{% set palette = palette | first %}
+{% endif %}
+{% set scheme = palette.scheme | d("default", true) %}
+{% set primary = palette.primary | d("indigo", true) %}
+{% set accent = palette.accent | d("indigo", true) %}
+
+<body dir="{{ direction }}" data-md-color-scheme="{{ scheme | replace(' ', '-') }}"
+    data-md-color-primary="{{ primary | replace(' ', '-') }}" data-md-color-accent="{{ accent | replace(' ', '-') }}">
+    {% else %}
+
     <body dir="{{ direction }}">
-  {% endif %}
-    {% set features = config.theme.features or [] %}
+        {% endif %}
+        {% set features = config.theme.features or [] %}
 
-    <!-- User preference: color palette -->
-    {% if not config.theme.palette is mapping %}
-      {% include "partials/javascripts/palette.html" %}
-    {% endif %}
+        <!-- User preference: color palette -->
+        {% if not config.theme.palette is mapping %}
+        {% include "partials/javascripts/palette.html" %}
+        {% endif %}
 
-    <!--
+        <!--
       State toggles - we need to set autocomplete="off" in order to reset the
       drawer on back button invocation in some browsers
     -->
-    <input
-      class="md-toggle"
-      data-md-toggle="drawer"
-      type="checkbox"
-      id="__drawer"
-      autocomplete="off"
-    />
-    <input
-      class="md-toggle"
-      data-md-toggle="search"
-      type="checkbox"
-      id="__search"
-      autocomplete="off"
-    />
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off" />
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off" />
 
-    <!-- Overlay for expanded drawer -->
-    <label class="md-overlay" for="__drawer"></label>
+        <!-- Overlay for expanded drawer -->
+        <label class="md-overlay" for="__drawer"></label>
 
-    <!-- Skip to content -->
-    <div data-md-component="skip">
-      {% if page.toc | first is defined %}
-        {% set skip = page.toc | first %}
-        <a href="{{ skip.url | url }}" class="md-skip">
-          {{ lang.t("action.skip") }}
-        </a>
-      {% endif %}
-    </div>
-
-    <!-- Announcement bar -->
-    <div data-md-component="announce">
-      {% if self.announce() %}
-        <aside class="md-banner">
-          <div class="md-banner__inner md-grid md-typeset">
-
-            <!-- Button to dismiss announcement -->
-            {% if "announce.dismiss" in features %}
-              <button
-                class="md-banner__button md-icon"
-                aria-label="{{ lang.t('announce.dismiss') }}"
-              >
-                {% set icon = config.theme.icon.close or "material/close" %}
-                {% include ".icons/" ~ icon ~ ".svg" %}
-              </button>
+        <!-- Skip to content -->
+        <div data-md-component="skip">
+            {% if page.toc | first is defined %}
+            {% set skip = page.toc | first %}
+            <a href="{{ skip.url | url }}" class="md-skip">
+                {{ lang.t("action.skip") }}
+            </a>
             {% endif %}
-
-            <!-- Announcement bar content -->
-            {% block announce %}{% endblock %}
-          </div>
-          {% if "announce.dismiss" in features %}
-            {% include "partials/javascripts/announce.html" %}
-          {% endif %}
-        </aside>
-      {% endif %}
-    </div>
-
-    <!-- Version warning -->
-    {% if config.extra.version %}
-      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
-        {% if self.outdated() %}
-          <aside class="md-banner md-banner--warning">
-            <div class="md-banner__inner md-grid md-typeset">
-              {% block outdated %}{% endblock %}
-            </div>
-            {% include "partials/javascripts/outdated.html" %}
-          </aside>
-        {% endif %}
-      </div>
-    {% endif %}
-
-    <!-- Header -->
-    {% block header %}
-      {% include "partials/header.html" %}
-    {% endblock %}
-
-    <!-- Container -->
-    <div class="md-container" data-md-component="container">
-
-      <!-- Hero teaser -->
-      {% block hero %}{% endblock %}
-
-      <!-- Navigation tabs (collapsing) -->
-      {% block tabs %}
-        {% if "navigation.tabs.sticky" not in features %}
-          {% if "navigation.tabs" in features %}
-            {% include "partials/tabs.html" %}
-          {% endif %}
-        {% endif %}
-      {% endblock %}
-
-      <!-- Main area -->
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-
-          <!-- Sidebars -->
-          {% block site_nav %}
-
-            <!-- Navigation -->
-            {% if nav %}
-              {% if page.meta and page.meta.hide %}
-                {% set hidden = "hidden" if "navigation" in page.meta.hide %}
-              {% endif %}
-              <div
-                class="md-sidebar md-sidebar--primary"
-                data-md-component="sidebar"
-                data-md-type="navigation"
-                {{ hidden }}
-              >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    {% include "partials/nav.html" %}
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-
-            <!-- Table of contents -->
-            {% if "toc.integrate" not in features %}
-              {% if page.meta and page.meta.hide %}
-                {% set hidden = "hidden" if "toc" in page.meta.hide %}
-              {% endif %}
-              <div
-                class="md-sidebar md-sidebar--secondary"
-                data-md-component="sidebar"
-                data-md-type="toc"
-                {{ hidden }}
-              >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    {% include "partials/toc.html" %}
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-          {% endblock %}
-
-          <!-- Page content -->
-          {% block container %}
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                {% block content %}
-                  {% include "partials/content.html" %}
-                {% endblock %}
-              </article>
-            </div>
-          {% endblock %}
-
-          <!-- User preference: content -->
-          {% include "partials/javascripts/content.html" %}
         </div>
 
-        <!-- Back-to-top button -->
-        {% if "navigation.top" in features %}
-          {% include "partials/top.html" %}
+        <!-- Announcement bar -->
+        <div data-md-component="announce">
+            {% if self.announce() %}
+            <aside class="md-banner">
+                <div class="md-banner__inner md-grid md-typeset">
+
+                    <!-- Button to dismiss announcement -->
+                    {% if "announce.dismiss" in features %}
+                    <button class="md-banner__button md-icon" aria-label="{{ lang.t('announce.dismiss') }}">
+                        {% set icon = config.theme.icon.close or "material/close" %}
+                        {% include ".icons/" ~ icon ~ ".svg" %}
+                    </button>
+                    {% endif %}
+
+                    <!-- Announcement bar content -->
+                    {% block announce %}{% endblock %}
+                </div>
+                {% if "announce.dismiss" in features %}
+                {% include "partials/javascripts/announce.html" %}
+                {% endif %}
+            </aside>
+            {% endif %}
+        </div>
+
+        <!-- Version warning -->
+        {% if config.extra.version %}
+        <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+            {% if self.outdated() %}
+            <aside class="md-banner md-banner--warning">
+                <div class="md-banner__inner md-grid md-typeset">
+                    {% block outdated %}{% endblock %}
+                </div>
+                {% include "partials/javascripts/outdated.html" %}
+            </aside>
+            {% endif %}
+        </div>
         {% endif %}
-      </main>
 
-      <!-- Footer -->
-      {% block footer %}
-        {% include "partials/footer.html" %}
-      {% endblock %}
-    </div>
+        <!-- Header -->
+        {% block header %}
+        {% include "partials/header.html" %}
+        {% endblock %}
 
-    <!-- Dialog -->
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
+        <!-- Container -->
+        <div class="md-container" data-md-component="container">
 
-    <!-- Progress indicator -->
-    {% if "navigation.instant.progress" in features %}
-      {% include "partials/progress.html" %}
-    {% endif %}
+            <!-- Hero teaser -->
+            {% block hero %}{% endblock %}
 
-    <!-- Consent -->
-    {% if config.extra.consent %}
-      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
-        <div class="md-consent__overlay"></div>
-        <aside class="md-consent__inner">
-          <form class="md-consent__form md-grid md-typeset" name="consent">
-            {% include "partials/consent.html" %}
-          </form>
-        </aside>
-      </div>
+            <!-- Navigation tabs (collapsing) -->
+            {% block tabs %}
+            {% if "navigation.tabs.sticky" not in features %}
+            {% if "navigation.tabs" in features %}
+            {% include "partials/tabs.html" %}
+            {% endif %}
+            {% endif %}
+            {% endblock %}
 
-      <!-- User preference: consent -->
-      {% include "partials/javascripts/consent.html" %}
-    {% endif %}
+            <!-- Main area -->
+            <main class="md-main" data-md-component="main">
+                <div class="md-main__inner md-grid">
 
-    <!-- Theme-related configuration -->
-    {% block config %}
-      {%- set app = {
+                    <!-- Sidebars -->
+                    {% block site_nav %}
+
+                    <!-- Navigation -->
+                    {% if nav %}
+                    {% if page.meta and page.meta.hide %}
+                    {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+                    {% endif %}
+                    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" {{
+                        hidden }}>
+                        <div class="md-sidebar__scrollwrap">
+                            <div class="md-sidebar__inner">
+                                {% include "partials/nav.html" %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Table of contents -->
+                    {% if "toc.integrate" not in features %}
+                    {% if page.meta and page.meta.hide %}
+                    {% set hidden = "hidden" if "toc" in page.meta.hide %}
+                    {% endif %}
+                    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" {{
+                        hidden }}>
+                        <div class="md-sidebar__scrollwrap">
+                            <div class="md-sidebar__inner">
+                                {% include "partials/toc.html" %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endblock %}
+
+                    <!-- Page content -->
+                    {% block container %}
+                    <div class="md-content" data-md-component="content">
+                        <article class="md-content__inner md-typeset">
+                            {% block content %}
+                            {% include "partials/content.html" %}
+                            {% endblock %}
+                        </article>
+                    </div>
+                    {% endblock %}
+
+                    <!-- User preference: content -->
+                    {% include "partials/javascripts/content.html" %}
+                </div>
+
+                <!-- Back-to-top button -->
+                {% if "navigation.top" in features %}
+                {% include "partials/top.html" %}
+                {% endif %}
+            </main>
+
+            <!-- Footer -->
+            {% block footer %}
+            {% include "partials/footer.html" %}
+            {% endblock %}
+        </div>
+        <div>aaa</div>
+        <!-- Dialog -->
+        <div class="md-dialog" data-md-component="dialog">
+            <div class="md-dialog__inner md-typeset"></div>
+        </div>
+        <!-- img View-->
+        {% include "partials/javascripts/imgView.html" %}
+        <!--imgView end-->
+
+        <!-- Progress indicator -->
+        {% if "navigation.instant.progress" in features %}
+        {% include "partials/progress.html" %}
+        {% endif %}
+
+        <!-- Consent -->
+        {% if config.extra.consent %}
+        <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+            <div class="md-consent__overlay"></div>
+            <aside class="md-consent__inner">
+                <form class="md-consent__form md-grid md-typeset" name="consent">
+                    {% include "partials/consent.html" %}
+                </form>
+            </aside>
+        </div>
+
+        <!-- User preference: consent -->
+        {% include "partials/javascripts/consent.html" %}
+        {% endif %}
+
+        <!-- Theme-related configuration -->
+        {% block config %}
+        {%- set app = {
         "base": base_url,
         "features": features,
         "translations": {},
         "search": "assets/javascripts/workers/search.js" | url
-      } -%}
+        } -%}
 
-      <!-- Versioning -->
-      {%- if config.extra.version -%}
+        <!-- Versioning -->
+        {%- if config.extra.version -%}
         {%- set _ = app.update({ "version": config.extra.version }) -%}
-      {%- endif -%}
+        {%- endif -%}
 
-      <!-- Tags -->
-      {%- if config.extra.tags -%}
+        <!-- Tags -->
+        {%- if config.extra.tags -%}
         {%- set _ = app.update({ "tags": config.extra.tags }) -%}
-      {%- endif -%}
+        {%- endif -%}
 
-      <!-- Translations -->
-      {%- set translations = app.translations -%}
-      {%- for key in [
+        <!-- Translations -->
+        {%- set translations = app.translations -%}
+        {%- for key in [
         "clipboard.copy",
         "clipboard.copied",
         "search.result.placeholder",
@@ -499,37 +487,39 @@
         "search.result.more.other",
         "search.result.term.missing",
         "select.version"
-      ] -%}
+        ] -%}
         {%- set _ = translations.update({ key: lang.t(key) }) -%}
-      {%- endfor -%}
+        {%- endfor -%}
 
-      <!-- Configuration -->
-      <script id="__config" type="application/json">
+        <!-- Configuration -->
+        <script id="__config" type="application/json">
         {{- app | tojson -}}
       </script>
-    {% endblock %}
+        {% endblock %}
 
-    <!-- Theme-related JavaScript -->
-    {% block scripts %}
-      <script src="{{ 'assets/javascripts/bundle.js' | url }}"></script>
 
-      <!-- Custom JavaScript -->
-      {% for script in config.extra_javascript %}
+        <!-- Theme-related JavaScript -->
+        {% block scripts %}
+        <script src="{{ 'assets/javascripts/bundle.js' | url }}"></script>
+
+        <!-- Custom JavaScript -->
+        {% for script in config.extra_javascript %}
         {{ script | script_tag }}
-      {% endfor %}
+        {% endfor %}
 
-      <!-- Service Worker -->
-      <script>
-        'use strict';
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-            .then(function (reg) {
-              console.log('PWA Registration succeeded. Scope is ' + reg.scope);
-            }).catch(function (error) {
-              console.log('PWA Registration failed with ' + error);
-            });
-        }
-      </script>
-    {% endblock %}
-  </body>
+        <!-- Service Worker -->
+        <script>
+            'use strict';
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+                    .then(function (reg) {
+                        console.log('PWA Registration succeeded. Scope is ' + reg.scope);
+                    }).catch(function (error) {
+                        console.log('PWA Registration failed with ' + error);
+                    });
+            }
+        </script>
+        {% endblock %}
+    </body>
+
 </html>
